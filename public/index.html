@@ -17,7 +17,7 @@
   <div class="font-bold text-2xl space-x-10">
     <a href="#" class="font-semibold hover:border-b-2 hover:border-dashed transform transition-all duration-600">Home <i class="fa-solid fa-house fa-2xs" style="color: #fadd02; margin-left: 5px;"></i></a>
     <a href="#" class="font-semibold hover:border-b-2 hover:border-dashed transform transition-all duration-600">Skills <i class="fa-solid fa-bookmark fa-xs" style="color: #ed3215;"></i></a>
-    <a href="#" class="font-semibold hover:border-b-2 hover:border-dashed transform transition-all duration-600">Project <i class="fa-solid fa-bars fa-2xs" style="color: #a915ed;"></i></a>
+    <a href="#" class="font-semibold hover:border-b-2 hover:border-dashed transform transition-all duration-600">Coins <i class="fa-solid fa-bars fa-2xs" style="color: #a915ed;"></i></a>
   </div>
 </header>
 
@@ -44,11 +44,10 @@
   </div>
 </div>
 
-
 <div id="spotify-status" class="mt-4 ml-80 flex items-center space-x-4">
   <img id="spotify-image" src="images/spotify.png" class="rounded-lg w-24 h-24" alt="Spotify Logo">
   <div>
-    <p class="text-lg font-semibold font-gemunu text-gega-yazi"><i class="fa-brands fa-spotify" style="color: #cfcfcf;"></i> Spotify Durumu:</p>
+    <p class="text-lg font-semibold font-gemunu text-gega-yazi"><i class="fa-brands fa-spotify" style="color: #cfcfcf;"></i> Spotify Status:</p>
     <p id="spotify-info" class="text-sm font-semibold text-gega-yazi font-gemunu text-gray-400"></p>
   </div>
 </div>
@@ -91,10 +90,10 @@
 
         if (data.data.spotify) {
           const { song, artist, album_art_url } = data.data.spotify;
-          spotifyStatus = song && artist ? `Şarkı: ${song} | Sanatçı: ${artist}` : 'Spotify’da dinlenmiyor.';
+          spotifyStatus = song && artist ? `Song: ${song} | Artist: ${artist}` : 'It is not listened to on Spotify.';
           spotifyImage = album_art_url || spotifyImage; // Şarkının albüm kapağını göster
         } else {
-          spotifyStatus = 'Spotify’da bir şey dinlenmiyor.';
+          spotifyStatus = 'Nothing is being listened to on spotify.';
         }
 
         // HTML elementlerini güncelle
@@ -139,10 +138,10 @@
         document.getElementById('spotify-info').innerText = spotifyStatus;
         document.getElementById('spotify-image').src = spotifyImage; // Spotify görselini güncelle
       } else {
-        console.error('Veri alınamadı:', data);
+        console.error('Failed to retrieve data:', data);
       }
     } catch (error) {
-      console.error('API isteği sırasında hata:', error);
+      console.error('Error during API request:', error);
     }
   }
 
@@ -150,7 +149,11 @@
   formatDateTime();
   setInterval(formatDateTime, 1000); // Her saniye güncelle
 
-  fetchDiscordStatus(); // Sayfa yüklendiğinde Discord durumunu güncelle
+  // Sayfa yüklendiğinde Discord ve Spotify bilgilerini güncelle
+  fetchDiscordStatus();
+
+  // Spotify bilgilerini her 30 saniyede bir güncelle
+  setInterval(fetchDiscordStatus, 10000);
 </script>
 </body>
 </html>
