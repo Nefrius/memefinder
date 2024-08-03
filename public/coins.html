@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="./css/styles.css" rel="stylesheet">
+  <style>
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-gega-arkaplan to-gega-ic">
+
+<header class="font-gemunu mt-52 ml-80 text-gega-yazi">
+  <div class="font-bold text-2xl space-x-10">
+    <a href="index.html" class="font-semibold hover:border-b-2 hover:border-dashed transform transition-all duration-600">Home <i class="fa-solid fa-house fa-2xs" style="color: #fadd02; margin-left: 5px;"></i></a>
+    <a href="skills.html" class="font-semibold hover:border-b-2 hover:border-dashed transform transition-all duration-600">Skills <i class="fa-solid fa-bookmark fa-xs" style="color: #ed3215;"></i></a>
+    <a href="coins.html" class="font-semibold hover:border-b-2 hover:border-dashed transform transition-all duration-600">Coins <i class="fa-solid fa-bars fa-2xs" style="color: #a915ed;"></i></a>
+  </div>
+</header>
+
+<div class="font-gemunu mt-8 ml-80 text-gega-yazi fade-in">
+  <h1 class="font-bold text-6xl cursor-default">Coins <i class="fa-solid fa-bitcoin-sign fa-2xs" style="color: #b031c9;"></i></h1>
+  <h2 class="font-semibold text-lg mt-2 cursor-default">Some of the coins that I think can rise.</h2>
+</div>
+
+<div class="border-b-2 mt-5 w-80 ml-80 transition-all duration-300 border-slate-400 fade-in"></div>
+
+<div class="container mx-auto p-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
+    <!-- Coin 1 -->
+    <div class="coin-card bg-opacity-50 bg-gray-700 rounded-lg shadow-lg overflow-hidden flex items-center p-4 fade-in backdrop-blur-md">
+      <img src="images/ripple.png" alt="Ripple" class="coin-image object-cover w-24 h-24">
+      <div class="coin-info text-gega-yazi flex-1 ml-4">
+        <h3 class="text-lg font-bold text-white">Ripple (XRP)</h3>
+        <p id="coin1-price" class="text-white">Current Price: $0.00</p>
+        <p id="coin1-trend" class="text-white">Price is decreasing</p>
+      </div>
+    </div>
+
+    <!-- Coin 2 -->
+    <div class="coin-card bg-opacity-50 bg-gray-800 rounded-lg shadow-lg overflow-hidden flex items-center p-4 fade-in backdrop-blur-md">
+      <img src="images/bitcoin.png" alt="Bitcoin" class="coin-image object-cover w-24 h-24">
+      <div class="coin-info text-gega-yazi flex-1 ml-4">
+        <h3 class="text-lg font-bold text-white">Bitcoin (BTC)</h3>
+        <p id="coin2-price" class="text-white">Current Price: $0.00</p>
+        <p id="coin2-trend" class="text-white">Price is decreasing</p>
+      </div>
+    </div>
+
+    <!-- Coin 3 -->
+    <div class="coin-card bg-opacity-50 bg-gray-700 rounded-lg shadow-lg overflow-hidden flex items-center p-4 fade-in backdrop-blur-md">
+      <img src="images/ethereum.png" alt="Ethereum" class="coin-image object-cover w-24 h-24">
+      <div class="coin-info text-gega-yazi flex-1 ml-4">
+        <h3 class="text-lg font-bold text-white">Ethereum (ETH)</h3>
+        <p id="coin3-price" class="text-white">Current Price: $0.00</p>
+        <p id="coin3-trend" class="text-white">Price is decreasing</p>
+      </div>
+    </div>
+
+    <!-- Coin 4 -->
+    <div class="coin-card bg-opacity-50 bg-gray-800 rounded-lg shadow-lg overflow-hidden flex items-center p-4 fade-in backdrop-blur-md">
+      <img src="images/litecoin.png" alt="Litecoin" class="coin-image object-cover w-24 h-24">
+      <div class="coin-info text-gega-yazi flex-1 ml-4">
+        <h3 class="text-lg font-bold text-white">Litecoin (LTC)</h3>
+        <p id="coin4-price" class="text-white">Current Price: $0.00</p>
+        <p id="coin4-trend" class="text-white">Price is decreasing</p>
+      </div>
+    </div>
+
+    <!-- Coin 5 -->
+    <div class="coin-card bg-opacity-50 bg-gray-700 rounded-lg shadow-lg overflow-hidden flex items-center p-4 fade-in backdrop-blur-md">
+      <img src="images/cardano.png" alt="Cardano" class="coin-image object-cover w-24 h-24">
+      <div class="coin-info text-gega-yazi flex-1 ml-4">
+        <h3 class="text-lg font-bold text-white">Cardano (ADA)</h3>
+        <p id="coin5-price" class="text-white">Current Price: $0.00</p>
+        <p id="coin5-trend" class="text-white">Price is decreasing</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.fade-in').forEach(function(element) {
+      element.classList.add('visible');
+    });
+
+    const previousPrices = {};
+
+    async function fetchCoinData() {
+      const apiKey = '842CF4C8-33DD-4E7C-B403-B52415DB1C39'; // Güncellenmiş API anahtarı
+      const coins = [
+        { id: 'coin1', symbol: 'XRP' },
+        { id: 'coin2', symbol: 'BTC' },
+        { id: 'coin3', symbol: 'ETH' },
+        { id: 'coin4', symbol: 'LTC' },
+        { id: 'coin5', symbol: 'ADA' },
+      ];
+
+      for (const coin of coins) {
+        try {
+          const response = await fetch(`https://rest.coinapi.io/v1/exchangerate/${coin.symbol}/USD`, {
+            headers: { 'X-CoinAPI-Key': apiKey }
+          });
+          const data = await response.json();
+          const priceElement = document.getElementById(`${coin.id}-price`);
+          const trendElement = document.getElementById(`${coin.id}-trend`);
+
+          const newPrice = data.rate;
+          const oldPrice = previousPrices[coin.symbol] || newPrice;
+          
+          const isUp = newPrice > oldPrice;
+          const trendClass = isUp ? 'text-green-500' : 'text-red-500';
+
+          priceElement.textContent = `Current Price: $${newPrice.toFixed(2)}`;
+          trendElement.textContent = isUp ? 'Price is increasing' : 'Price is decreasing';
+          trendElement.className = `text-white ${trendClass}`;
+
+          // Update previous price
+          previousPrices[coin.symbol] = newPrice;
+        } catch (error) {
+          console.error(`Error fetching ${coin.symbol} data:`, error);
+        }
+      }
+    }
+
+    fetchCoinData();
+    setInterval(fetchCoinData, 60000); // Her 60 saniyede bir verileri yenile
+  });
+</script>
+
+
+</body>
+</html>
