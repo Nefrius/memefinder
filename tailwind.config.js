@@ -21,6 +21,8 @@ module.exports = {
         'gega-baslik': '#5C5470', 
         // 4D4BCA 615EFC 
       },
+
+
     },
   },
   plugins: [],  

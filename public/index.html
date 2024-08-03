@@ -8,8 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   <link href="./css/styles.css" rel="stylesheet">
+  <style>
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body class="bg-gradient-to-r from-gega-arkaplan to-gega-ic">
 
@@ -21,18 +29,17 @@
   </div>
 </header>
 
-<div class="font-gemunu mt-8 ml-80 text-gega-yazi">
+<div class="font-gemunu mt-8 ml-80 text-gega-yazi fade-in">
   <h1 class="font-bold text-6xl cursor-default">nefrius! <i class="fa-solid fa-house fa-2xs" style="color: #FFD43B;"></i></h1>
   <h2 class="font-semibold text-2xl mt-2 cursor-default">Hi! I'm Enes, a <span class="text-blue-500">15-year-old</span> developer from <span class="text-red-500">Turkey</span>.</h2>
   <i class="fa-brands fa-spotify fa-2xl mt-8" style="color: #cfcfcf;"></i>
   <i class="fa-brands fa-github fa-2xl mt-8 ml-4" style="color: #cfcfcf;"></i>
-  <div id="current-datetime" class="text-base mt-5 text-slate-400 font-semibold"></div>
-
+  <div id="current-datetime" class="text-base mt-5 text-slate-400 font-semibold fade-in"></div>
 </div>
 
-<div class="border-b-2 mt-5 w-80 ml-80  transition-all duration-300 border-slate-400"></div>
+<div class="border-b-2 mt-5 w-80 ml-80 transition-all duration-300 border-slate-400 fade-in"></div>
 
-<div id="discord-status" class="relative flex items-center space-x-4 text-gega-yazi ml-80 font-gemunu mt-10">
+<div id="discord-status" class="relative flex items-center space-x-4 text-gega-yazi ml-80 font-gemunu mt-10 fade-in">
   <div class="relative">
     <img id="discord-avatar" src="" alt="Discord Avatar" class="w-24 h-24 rounded-full" />
     <div id="status-indicator" class="absolute w-6 h-6 rounded-full bottom-3 right-3 transform translate-x-1/2 translate-y-1/2 bg-gray-500"></div>
@@ -44,7 +51,7 @@
   </div>
 </div>
 
-<div id="spotify-status" class="mt-4 ml-80 flex items-center space-x-4">
+<div id="spotify-status" class="mt-4 ml-80 flex items-center space-x-4 fade-in">
   <img id="spotify-image" src="images/spotify.png" class="rounded-lg w-24 h-24" alt="Spotify Logo">
   <div>
     <p class="text-lg font-semibold font-gemunu text-gega-yazi"><i class="fa-brands fa-spotify" style="color: #cfcfcf;"></i> Spotify Status:</p>
@@ -53,107 +60,113 @@
 </div>
 
 <script>
-  function formatDateTime() {
-    const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZoneName: 'short'
-    };
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.fade-in').forEach(function(element) {
+      element.classList.add('visible');
+    });
 
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString('en-US', options);
+    function formatDateTime() {
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short'
+      };
 
-    document.getElementById('current-datetime').innerText = formattedDate;
-  }
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString('en-US', options);
 
-  async function fetchDiscordStatus() {
-    const userId = '1127276483359014963'; // Kullanıcı ID'nizi buraya ekleyin
-    try {
-      const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-      const data = await response.json();
-      console.log(data); // Yanıtı kontrol etmek için ekleyin
-
-      if (data && data.data) {
-        // Discord bilgileri
-        const avatarUrl = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
-        const username = data.data.discord_user.username;
-        const discordStatus = data.data.discord_status;
-
-        // Spotify bilgileri
-        let spotifyStatus = '';
-        let spotifyImage = 'images/spotify.png'; // Varsayılan Spotify görseli
-
-        if (data.data.spotify) {
-          const { song, artist, album_art_url } = data.data.spotify;
-          spotifyStatus = song && artist ? `Song: ${song} | Artist: ${artist}` : 'It is not listened to on Spotify.';
-          spotifyImage = album_art_url || spotifyImage; // Şarkının albüm kapağını göster
-        } else {
-          spotifyStatus = 'Nothing is being listened to on spotify.';
-        }
-
-        // HTML elementlerini güncelle
-        document.getElementById('discord-avatar').src = avatarUrl;
-        document.getElementById('discord-username').innerText = username;
-        document.getElementById('discord-status-text').innerText = discordStatus;
-
-        // Durum rengini güncelle
-        const statusIndicator = document.getElementById('status-indicator');
-        const statusText = document.getElementById('discord-status-text');
-
-        switch (discordStatus) {
-          case 'dnd':
-            statusIndicator.classList.add('bg-red-500');
-            statusIndicator.classList.remove('bg-gray-500');
-            statusText.classList.add('text-red-500');
-            statusText.classList.remove('text-gray-500');
-            break;
-          case 'online':
-            statusIndicator.classList.add('bg-green-500');
-            statusIndicator.classList.remove('bg-gray-500');
-            statusText.classList.add('text-green-500');
-            statusText.classList.remove('text-gray-500');
-            break;
-          case 'idle':
-            statusIndicator.classList.add('bg-yellow-500');
-            statusIndicator.classList.remove('bg-gray-500');
-            statusText.classList.add('text-yellow-500');
-            statusText.classList.remove('text-gray-500');
-            break;
-          case 'offline':
-            statusIndicator.classList.add('bg-gray-500');
-            statusText.classList.add('text-gray-500');
-            statusText.classList.remove('text-red-500', 'text-green-500', 'text-yellow-500');
-            break;
-          default:
-            statusIndicator.classList.add('bg-gray-500');
-            statusText.classList.add('text-gray-500');
-            statusText.classList.remove('text-red-500', 'text-green-500', 'text-yellow-500');
-        }
-
-        document.getElementById('spotify-info').innerText = spotifyStatus;
-        document.getElementById('spotify-image').src = spotifyImage; // Spotify görselini güncelle
-      } else {
-        console.error('Failed to retrieve data:', data);
-      }
-    } catch (error) {
-      console.error('Error during API request:', error);
+      document.getElementById('current-datetime').innerText = formattedDate;
     }
-  }
 
-  // Sayfa yüklendiğinde tarih ve saat güncellemesini başlat
-  formatDateTime();
-  setInterval(formatDateTime, 1000); // Her saniye güncelle
+    async function fetchDiscordStatus() {
+      const userId = '1127276483359014963'; // Kullanıcı ID'nizi buraya ekleyin
+      try {
+        const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+        const data = await response.json();
+        console.log(data); // Yanıtı kontrol etmek için ekleyin
 
-  // Sayfa yüklendiğinde Discord ve Spotify bilgilerini güncelle
-  fetchDiscordStatus();
+        if (data && data.data) {
+          // Discord bilgileri
+          const avatarUrl = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
+          const username = data.data.discord_user.username;
+          const discordStatus = data.data.discord_status;
 
-  // Spotify bilgilerini her 30 saniyede bir güncelle
-  setInterval(fetchDiscordStatus, 10000);
+          // Spotify bilgileri
+          let spotifyStatus = '';
+          let spotifyImage = 'images/spotify.png'; // Varsayılan Spotify görseli
+
+          if (data.data.spotify) {
+            const { song, artist, album_art_url } = data.data.spotify;
+            spotifyStatus = song && artist ? `Song: ${song} | Artist: ${artist}` : 'It is not listened to on Spotify.';
+            spotifyImage = album_art_url || spotifyImage; // Şarkının albüm kapağını göster
+          } else {
+            spotifyStatus = 'Nothing is being listened to on spotify.';
+          }
+
+          // HTML elementlerini güncelle
+          document.getElementById('discord-avatar').src = avatarUrl;
+          document.getElementById('discord-username').innerText = username;
+          document.getElementById('discord-status-text').innerText = discordStatus;
+
+          // Durum rengini güncelle
+          const statusIndicator = document.getElementById('status-indicator');
+          const statusText = document.getElementById('discord-status-text');
+
+          switch (discordStatus) {
+            case 'dnd':
+              statusIndicator.classList.add('bg-red-500');
+              statusIndicator.classList.remove('bg-gray-500');
+              statusText.classList.add('text-red-500');
+              statusText.classList.remove('text-gray-500');
+              break;
+            case 'online':
+              statusIndicator.classList.add('bg-green-500');
+              statusIndicator.classList.remove('bg-gray-500');
+              statusText.classList.add('text-green-500');
+              statusText.classList.remove('text-gray-500');
+              break;
+            case 'idle':
+              statusIndicator.classList.add('bg-yellow-500');
+              statusIndicator.classList.remove('bg-gray-500');
+              statusText.classList.add('text-yellow-500');
+              statusText.classList.remove('text-gray-500');
+              break;
+            case 'offline':
+              statusIndicator.classList.add('bg-gray-500');
+              statusText.classList.add('text-gray-500');
+              statusText.classList.remove('text-red-500', 'text-green-500', 'text-yellow-500');
+              break;
+            default:
+              statusIndicator.classList.add('bg-gray-500');
+              statusText.classList.add('text-gray-500');
+              statusText.classList.remove('text-red-500', 'text-green-500', 'text-yellow-500');
+          }
+
+          document.getElementById('spotify-info').innerText = spotifyStatus;
+          document.getElementById('spotify-image').src = spotifyImage; // Spotify görselini güncelle
+        } else {
+          console.error('Failed to retrieve data:', data);
+        }
+      } catch (error) {
+        console.error('Error during API request:', error);
+      }
+    }
+
+    // Sayfa yüklendiğinde tarih ve saat güncellemesini başlat
+    formatDateTime();
+    setInterval(formatDateTime, 1000); // Her saniye güncelle
+
+    // Sayfa yüklendiğinde Discord ve Spotify bilgilerini güncelle
+    fetchDiscordStatus();
+
+    // Spotify bilgilerini her 30 saniyede bir güncelle
+    setInterval(fetchDiscordStatus, 10000);
+  });
 </script>
 </body>
 </html>

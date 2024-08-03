@@ -8,6 +8,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="./css/styles.css" rel="stylesheet">
+  <style>
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body class="bg-gradient-to-r from-gega-arkaplan to-gega-ic">
 
@@ -24,7 +33,7 @@
   <h2 class="font-semibold text-lg mt-2 cursor-default">Skills and technologies I use to build things.</h2>
 </div>
 
-<div class="grid grid-cols-5 gap-4 mt-10 mx-80">
+<div class="grid grid-cols-5 gap-4 mt-10 mx-80 fade-in">
   <a href="https://www.w3schools.com/html/" class="block rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105 aspect-w-1 aspect-h-1">
     <img src="images/html5.png" alt="HTML5" class="object-cover w-full h-full">
   </a>
@@ -41,6 +50,14 @@
     <img src="images/nodejs.png" alt="Node.js" class="object-cover w-full h-full">
   </a>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.fade-in').forEach(function(element) {
+      element.classList.add('visible');
+    });
+  });
+</script>
 
 </body>
 </html>
